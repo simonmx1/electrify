@@ -9,9 +9,6 @@
 
     export default {
         name: "ElectrifyLayer",
-        components: {
-            axios
-        },
         stations: null,
         async mounted() {
             await this.loadStations();
@@ -19,8 +16,9 @@
         },
         methods: {
             async loadStations() {
-                let response = await  axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
-                this.stations = response;
+                let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/get-station-details/');
+                this.stations = response.data;
+                alert(this.stations.data);
             },
             async loadStationDetails() {
 
