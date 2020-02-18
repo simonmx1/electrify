@@ -4,6 +4,7 @@
             app
             color=primary
             dark
+            clipped-left
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>
@@ -14,7 +15,7 @@
       <v-text-field
               v-model="searchTerm"
               :append-icon-cb="() => {}"
-              placeholder="Nach Gebiet suchen..."
+              placeholder="Nach Ladestation suchen..."
               single-line
               append-icon="search"
               color="white"
@@ -26,6 +27,7 @@
             app
             clipped
             dark
+            class="white--text"
     >
 
       hello
