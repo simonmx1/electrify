@@ -29,7 +29,6 @@
                 dark
                 class="white--text"
         >
-            {{this.drawer.name}}
 
       hello
     </v-navigation-drawer>

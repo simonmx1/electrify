@@ -14,11 +14,11 @@
             :attribution="attribution"
     />
     <l-marker
-
             v-for="l in stations"
             :key="l.name"
             :lat-lng="convertLatLng(l)"
-    />
+
+    ><img src="../assets/charger.png" alt="No"/></l-marker>
   </l-map>
 </template>
 
@@ -41,9 +41,6 @@
       defaultCenter: {type: Array, required: false},
       searchTerm: {type: String, required: false, default: null},
       stations: {type: Array, required: true}
-    },
-    mounted() {
-      console.log(this.stations);
     },
     methods: {
       convertLatLng(l) {
