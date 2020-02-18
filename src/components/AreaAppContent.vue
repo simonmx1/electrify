@@ -33,62 +33,77 @@
   import GStatBaseMap from "./BaseMap";
   import axios from "axios";
 
-  export default {
-    name: "AreaAppContent",
-    components: {
-      GStatBaseMap
-    },
-    props: {
-      searchTerm: {type: String, required: false, default: null}
-    },
-    data() {
-      return {
-        stations: null
-      }
-    },
-    created() {
-    },
-    async mounted() {
-      await this.loadStations();
-      await this.loadPlugs();
+    export default {
+        name: "AreaAppContent",
+        components: {
+            GStatBaseMap
+        },
+        props: {
+            searchTerm: {type: String, required: false, default: null}
+        },
+        watch: {
+            searchTerm: function () {
+                this.filterStations();
+            }
+        },
+        data() {
+            return {
+                stationPlugs: null,
+                stations: null,
+                plugs: null,
+                filteredStations: null
+            }
+        },
+        created() {
+        },
+        async mounted() {
+            await this.loadStations();
+            await this.loadPlugs();
 
-      let stationPlugs = this.getPlugsFromStation(this.stations[0].id);
+            this.stationPlugs = this.getPlugsFromStation(this.stations[0].id);
 
-      if (stationPlugs != null)
-        stationPlugs.forEach(function (plug) {
-          alert("plug: " + plug.name);
-        });
-      else
-        alert("plugs = null");
-      this.filterStations();
-    },
-    methods: {
-      async loadStations() {
-        let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/get-station-details/');
-        this.stations = response.data;
-        //alert(this.stations);
-      },
-      async loadPlugs() {
-        let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/plugs/get-station-details/');
-        this.plugs = response.data;
-        //alert(this.plugs[0].latitude);
-      },
-      getPlugsFromStation(id) {
-        let ret = [];
-        for (let i = 0; i < this.plugs.length; i++) {
-          let plug = this.plugs[i];
-          if (plug.parentStation == id) {
-            ret.push(plug);
-          }
+            if (this.stationPlugs != null)
+                this.stationPlugs.forEach(function (plug) {
+                    alert("plug: " + plug.name);
+                });
+            else
+                alert("plugs = null");
+            this.filterStations();
+        },
+        methods: {
+            async loadStations() {
+                let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/get-station-details/');
+                this.stations = response.data;
+                //alert(this.stations);
+            },
+            async loadPlugs() {
+                let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/plugs/get-station-details/');
+                this.plugs = response.data;
+                //alert(this.plugs[0].latitude);
+            },
+            getPlugsFromStation(id) {
+                let ret = [];
+                for (let i = 0; i < this.plugs.length; i++) {
+                    let plug = this.plugs[i];
+                    if (plug.parentStation == id) {
+                        ret.push(plug);
+                    }
+                }
+                return ret;
+            },
+            filterStations() {
+                if (this.searchTerm == null) {
+                    this.filteredStations = this.stations;
+                } else {
+                    for (let i = 0; i < this.stations.length; i++) {
+                        if (this.stations[i].name.contains(this.searchTerm)) {
+                            this.filteredStations.push(this.stations[i]);
+                        }
+                    }
+                }
+            }
         }
-        return ret;
-      },
-      filterStations() {
-        if (this.searchTerm != null)
-          alert(this.searchTerm);
-      }
     }
-  }
 </script>
 
 <style>
