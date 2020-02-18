@@ -39,10 +39,17 @@
         props: {
             searchTerm: {type: String, required: false, default: null}
         },
+        watch: {
+            searchTerm: function () {
+                this.filterStations();
+            }
+        },
         data() {
             return {
-                detailDialog: false,
-                currentArea: null,
+                stationPlugs: null,
+                stations: null,
+                plugs: null,
+                filteredStations: null
             }
         },
         created() {
@@ -51,10 +58,10 @@
             await this.loadStations();
             await this.loadPlugs();
 
-            let stationPlugs = this.getPlugsFromStation(this.stations[0].id);
+            this.stationPlugs = this.getPlugsFromStation(this.stations[0].id);
 
-            if (stationPlugs != null)
-                stationPlugs.forEach(function (plug) {
+            if (this.stationPlugs != null)
+                this.stationPlugs.forEach(function (plug) {
                     alert("plug: " + plug.name);
                 });
             else
@@ -62,10 +69,6 @@
             this.filterStations();
         },
         methods: {
-            onMouseClick(event) {
-                this.detailDialog = true;
-                this.currentArea = event;
-            },
             async loadStations() {
                 let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/get-station-details/');
                 this.stations = response.data;
@@ -87,8 +90,15 @@
                 return ret;
             },
             filterStations() {
-                if(this.searchTerm != null)
-                    alert(this.searchTerm);
+                if (this.searchTerm == null) {
+                    this.filteredStations = this.stations;
+                } else {
+                    for (let i = 0; i < this.stations.length; i++) {
+                        if (this.stations[i].name.contains(this.searchTerm)) {
+                            this.filteredStations.push(this.stations[i]);
+                        }
+                    }
+                }
             }
         }
     }
