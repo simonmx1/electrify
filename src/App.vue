@@ -32,7 +32,7 @@
 
       hello
     </v-navigation-drawer>
-    <area-app-content>
+    <area-app-content :search-term=searchTerm>
 
     </area-app-content>
     <v-footer
@@ -57,7 +57,7 @@
     },
 
     data: () => ({
-      //
+      searchTerm: null
     }),
   };
 </script>
