@@ -67,5 +67,5 @@
 </script>
 
 <style scoped>
-  @import "../../node_modules/leaflet/dist/leaflet.css";
+    @import "../../node_modules/leaflet/dist/leaflet.css";
 </style>
