@@ -57,7 +57,8 @@
     },
 
     data: () => ({
-      searchTerm: null
+      searchTerm: null,
+      drawer: true,
     }),
   };
 </script>

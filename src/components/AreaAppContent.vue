@@ -5,9 +5,11 @@
             style="height: 100%; padding: 0"
     >
       <g-stat-base-map
+              v-if=this.stations
               :zoom="9"
               :default-center="[46.4, 11.5]"
               :search-term=this.searchTerm
+              :stations=this.stations
               @mouseClick="onMouseClick"
               class="float-none"
               ref="map"
@@ -41,8 +43,7 @@
     },
     data() {
       return {
-        detailDialog: false,
-        currentArea: null,
+        stations: null
       }
     },
     created() {
@@ -62,10 +63,6 @@
       this.filterStations();
     },
     methods: {
-      onMouseClick(event) {
-        this.detailDialog = true;
-        this.currentArea = event;
-      },
       async loadStations() {
         let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/get-station-details/');
         this.stations = response.data;

@@ -1,25 +1,30 @@
 <template>
   <l-map
-    :style="{
+          :style="{
       height: '100%'
     }"
-    :zoom="zoom"
-    :center="center"
-    @update:zoom="onZoom"
-    @move="onMove"
-    ref="map"
+          :zoom="zoom"
+          :center="center"
+          @update:zoom="onZoom"
+          @move="onMove"
+          ref="map"
   >
     <l-tile-layer
-      :url="'http://{s}.tile.osm.org/{z}/{x}/{y}.png'"
-      :attribution="attribution"
+            :url="'http://{s}.tile.osm.org/{z}/{x}/{y}.png'"
+            :attribution="attribution"
     />
-    <l-marker v-for="l in stations" :key="l.name" :lat-lng="convertLatLng(l)" :icon="icon"/>
+    <l-marker
+
+            v-for="l in stations"
+            :key="l.name"
+            :lat-lng="convertLatLng(l)"
+    />
   </l-map>
 </template>
 
 <script>
-  import {LMap, LTileLayer, LMarker } from 'vue2-leaflet';
-  import { latLng, icon, Icon } from 'leaflet';
+  import {LMap, LTileLayer, LMarker} from 'vue2-leaflet';
+  import {latLng, icon, Icon} from 'leaflet';
   import iconUrl from 'leaflet/dist/images/marker-icon.png';
   import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 
@@ -36,6 +41,9 @@
       defaultCenter: {type: Array, required: false},
       searchTerm: {type: String, required: false, default: null},
       stations: {type: Array, required: true}
+    },
+    mounted() {
+      console.log(this.stations);
     },
     methods: {
       convertLatLng(l) {
@@ -67,5 +75,5 @@
 </script>
 
 <style scoped>
-    @import "../../node_modules/leaflet/dist/leaflet.css";
+  @import "../../node_modules/leaflet/dist/leaflet.css";
 </style>
