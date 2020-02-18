@@ -28,7 +28,7 @@
 </template>
 
 <script>
-  import GStatBaseMap from "./GStatBaseMap";
+  import GStatBaseMap from "./BaseMap";
   //import ResultDiagram from "./ResultDiagram";
 
   export default {
