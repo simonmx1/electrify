@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar
             app
-            color="primary"
+            color=primary
             dark
     >
       <div class="d-flex align-center">
@@ -10,15 +10,22 @@
       </div>
     </v-app-bar>
     <v-navigation-drawer
-            right
             clipped
             dark
     >
-
+      hello
     </v-navigation-drawer>
     <area-app-content>
 
     </area-app-content>
+    <v-footer
+            app
+            color=primary
+            dark
+    >Electrify
+      <v-spacer/>
+      © 2020
+    </v-footer>
   </v-app>
 </template>
 
