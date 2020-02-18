@@ -13,18 +13,20 @@
       :url="'http://{s}.tile.osm.org/{z}/{x}/{y}.png'"
       :attribution="attribution"
     />
+    <l-marker></l-marker>
   </l-map>
 </template>
 
 <script>
-  import {LMap, LTileLayer} from 'vue2-leaflet';
+  import {LMap, LTileLayer, LMarker} from 'vue2-leaflet';
   import axios from 'axios';
 
   export default {
     name: "GStatBaseMap",
     components: {
       LMap,
-      LTileLayer
+      LTileLayer,
+      LMarker
     },
     props: {
       height: {type: String, required: false, default: "900px"},

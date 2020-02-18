@@ -30,7 +30,6 @@
 <script>
   import GStatBaseMap from "./BaseMap";
   import axios from "axios";
-  //import ResultDiagram from "./ResultDiagram";
 
   export default {
     name: "AreaAppContent",
@@ -44,11 +43,6 @@
       return {
         detailDialog: false,
         currentArea: null,
-        spinning: false,
-
-        geoJson: null,
-        geoData: null,
-        scales: null
       }
     },
     created() {
@@ -69,23 +63,7 @@
     methods: {
       onMouseClick(event) {
         this.detailDialog = true;
-        this.currentArea = event.target.feature;
-        //this.$refs.map.centerOn(event.target);
-      },
-      legendArray() {
-        let ret = [];
-        let data = this.geoData[this.currentArea.id];
-        for (let scale of Object.keys(data)) {
-          if (this.scales[scale]) {
-            ret.push({
-              scale: this.scales[scale],
-              value: data[scale],
-              percentage: data[scale] * 100 / data['totalValue']
-            })
-          }
-        }
-        ret.sort((s1, s2) => s2.value - s1.value);
-        return ret;
+        this.currentArea = event;
       },
       async loadStations() {
         let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/get-station-details/');
