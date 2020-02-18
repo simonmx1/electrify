@@ -5,14 +5,29 @@
             color=primary
             dark
     >
-      <div class="d-flex align-center">
-        <h1>ELECTRIFY</h1>
-      </div>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>
+        <v-icon>mdi-linux</v-icon>
+        ELECTRIFY
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-text-field
+              v-model="searchTerm"
+              :append-icon-cb="() => {}"
+              placeholder="Nach Gebiet suchen..."
+              single-line
+              append-icon="search"
+              color="white"
+              hide-details
+      />
     </v-app-bar>
     <v-navigation-drawer
+            v-model="drawer"
+            app
             clipped
             dark
     >
+
       hello
     </v-navigation-drawer>
     <area-app-content>
