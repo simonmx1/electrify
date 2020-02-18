@@ -32,19 +32,6 @@
       defaultCenter: {type: Array, required: false},
       searchTerm: {type: String, required: false, default: null}
     },
-    async mounted() {
-      await this.loadStations();
-      await this.loadPlugs();
-
-      let stationPlugs = this.getPlugsFromStation(this.stations[0].id);
-
-      if (stationPlugs != null)
-        stationPlugs.forEach(function (plug) {
-          alert("plug: " + plug.name);
-        });
-      else
-        alert("plugs = null")
-    },
     methods: {
       onZoom(event) {
         this.$emit('zoom', event)
@@ -60,26 +47,6 @@
       },
       onMouseClick(event) {
         this.$emit('mouseClick', event)
-      },
-      async loadStations() {
-        let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/get-station-details/');
-        this.stations = response.data;
-        //alert(this.stations);
-      },
-      async loadPlugs() {
-        let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/plugs/get-station-details/');
-        this.plugs = response.data;
-        //alert(this.plugs[0].latitude);
-      },
-      getPlugsFromStation(id) {
-        let ret = [];
-        for (let i = 0; i < this.plugs.length; i++) {
-          let plug = this.plugs[i];
-          if (plug.parentStation == id) {
-            ret.push(plug);
-          }
-        }
-        return ret;
       }
 
     },

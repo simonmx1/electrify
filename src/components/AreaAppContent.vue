@@ -29,12 +29,12 @@
 
 <script>
   import GStatBaseMap from "./BaseMap";
+  import axios from "axios";
   //import ResultDiagram from "./ResultDiagram";
 
   export default {
     name: "AreaAppContent",
     components: {
-      //ResultDiagram,
       GStatBaseMap
     },
     props: {
@@ -54,7 +54,17 @@
     created() {
     },
     async mounted() {
-      //this.spinning = true;
+      await this.loadStations();
+      await this.loadPlugs();
+
+      let stationPlugs = this.getPlugsFromStation(this.stations[0].id);
+
+      if (stationPlugs != null)
+        stationPlugs.forEach(function (plug) {
+          alert("plug: " + plug.name);
+        });
+      else
+        alert("plugs = null")
     },
     methods: {
       onMouseClick(event) {
@@ -77,6 +87,26 @@
         ret.sort((s1, s2) => s2.value - s1.value);
         return ret;
       },
+      async loadStations() {
+        let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/get-station-details/');
+        this.stations = response.data;
+        //alert(this.stations);
+      },
+      async loadPlugs() {
+        let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/plugs/get-station-details/');
+        this.plugs = response.data;
+        //alert(this.plugs[0].latitude);
+      },
+      getPlugsFromStation(id) {
+        let ret = [];
+        for (let i = 0; i < this.plugs.length; i++) {
+          let plug = this.plugs[i];
+          if (plug.parentStation == id) {
+            ret.push(plug);
+          }
+        }
+        return ret;
+      }
     }
   }
 </script>
