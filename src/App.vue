@@ -1,34 +1,42 @@
 <template>
-    <v-app>
-        <v-app-bar
-                app
-                color=primary
-                dark
-                clipped-left
-        >
-            <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-            <v-toolbar-title>
-                <v-icon>mdi-linux</v-icon>
-                ELECTRIFY
-            </v-toolbar-title>
-            <v-spacer></v-spacer>
-            <v-text-field
-                    v-model="searchTerm"
-                    :append-icon-cb="() => {}"
-                    placeholder="Nach Ladestation suchen..."
-                    single-line
-                    append-icon="search"
-                    color="white"
-                    hide-details
-            />
-        </v-app-bar>
-        <v-navigation-drawer
-                v-model="drawer"
-                app
-                clipped
-                dark
-                class="white--text"
-        >
+  <v-app>
+    <v-app-bar
+            app
+            color=primary
+            dark
+            clipped-left
+    >
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>
+        <v-icon>mdi-linux</v-icon>
+        ELECTRIFY
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-text-field
+              v-model="searchTerm"
+              :append-icon-cb="() => {}"
+              placeholder="Nach Ladestation suchen..."
+              single-line
+              append-icon="search"
+              color="white"
+              hide-details
+      />
+    </v-app-bar>
+    <v-navigation-drawer
+            v-model="menu"
+            app
+            clipped
+            dark
+            mini
+            class="white--text">
+    </v-navigation-drawer>
+    <v-navigation-drawer
+            v-model="drawer"
+            app
+            clipped
+            dark
+            class="white--text"
+    >
 
       hello
     </v-navigation-drawer>
@@ -47,18 +55,19 @@
 </template>
 
 <script>
-    import AreaAppContent from './components/AreaAppContent';
+  import AreaAppContent from './components/AreaAppContent';
 
-    export default {
-        name: 'App',
+  export default {
+    name: 'App',
 
-        components: {
-            AreaAppContent
-        },
+    components: {
+      AreaAppContent
+    },
 
     data: () => ({
       searchTerm: null,
       drawer: true,
+      menu: null
     }),
   };
 </script>

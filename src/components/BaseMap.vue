@@ -17,16 +17,13 @@
             v-for="l in stations"
             :key="l.name"
             :lat-lng="convertLatLng(l)"
-
-    ><img src="../assets/charger.png" alt="No"/></l-marker>
+    />
   </l-map>
 </template>
 
 <script>
   import {LMap, LTileLayer, LMarker} from 'vue2-leaflet';
-  import {latLng, icon, Icon} from 'leaflet';
-  import iconUrl from 'leaflet/dist/images/marker-icon.png';
-  import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
+  import {latLng} from 'leaflet';
 
   export default {
     name: "GStatBaseMap",
@@ -58,12 +55,7 @@
 
     },
     data() {
-      let customicon = icon(Object.assign({},
-        Icon.Default.prototype.options,
-        {iconUrl, shadowUrl}
-      ));
       return {
-        icon: customicon,
         attribution: '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
         center: this.defaultCenter,
       }
