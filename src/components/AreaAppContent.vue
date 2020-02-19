@@ -14,6 +14,7 @@
                     class="float-none"
                     ref="map"
                     style="z-index: 0"
+                    @drawer="drawer"
             />
             <v-dialog
                     v-model="detailDialog"
@@ -59,12 +60,12 @@
             await this.loadStations();
             await this.loadPlugs();
             this.filterStations();
-
-            let event = [this.filteredStations[0],this.getPlugsFromStation(this.filteredStations[0].id)];
-            this.drawer(event);
         },
         methods: {
-            drawer(event) {
+            drawer(e) {
+                console.log(this.plugs);
+                let event = [e,this.getPlugsFromStation(e)];
+
                 this.$emit("drawer", event);
             },
             async loadStations() {
@@ -92,7 +93,7 @@
                     this.filteredStations = this.stations;
                 } else {
                     for (let i = 0; i < this.stations.length; i++) {
-                        if (this.stations[i].name.contains(this.searchTerm)) {
+                        if (this.stations[i].name.contains(this.searchTerm) && this.stations[i].accessType != "private") {
                             this.filteredStations.push(this.stations[i]);
                         }
                     }

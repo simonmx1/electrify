@@ -1,45 +1,4 @@
 <template>
-  <v-app>
-    <v-app-bar
-            app
-            color=primary
-            dark
-            clipped-right
-            clipped-left
-    >
-      <v-toolbar-title>
-
-        <v-toolbar-title><v-icon x-large>mdi-battery-charging-100</v-icon>    ELECTRIFY</v-toolbar-title>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-text-field
-              v-model="searchTerm"
-              :append-icon-cb="() => {}"
-              placeholder="Nach Ladestation suchen..."
-              single-line
-              append-icon="search"
-              color="white"
-              hide-details
-      />
-    </v-app-bar>
-    <v-navigation-drawer
-            v-model="menu"
-            app
-            clipped
-            dark
-            mini-variant
-            class="white--text">
-    </v-navigation-drawer>
-    <v-navigation-drawer
-            v-model="drawer"
-            app
-            clipped
-            dark
-            right
-            class="white--text"
-            v-if="station != null"
-    >
-
     <v-app>
         <v-app-bar
                 app
@@ -49,8 +8,11 @@
                 clipped-left
         >
             <v-toolbar-title>
-                <v-icon>mdi-linux</v-icon>
-                ELECTRIFY
+
+                <v-toolbar-title>
+                    <v-icon x-large>mdi-battery-charging-100</v-icon>
+                    ELECTRIFY
+                </v-toolbar-title>
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-text-field
@@ -80,12 +42,16 @@
                 class="white--text"
                 v-if="station != null"
         >
+
             <v-icon x-large @click.stop="station = null">mdi-chevron-double-right</v-icon>
             <br>
             name: {{this.station.name}}
             <v-ul>
                 <v-list v-for="plug in this.plugs" :key="plug.id">
-                    {{plug.name}}
+                    <li>
+                        {{plug.name}}
+                        <v-spacer></v-spacer>
+                    </li>
                 </v-list>
             </v-ul>
 
@@ -126,6 +92,8 @@
             draw(event) {
                 this.station = event[0];
                 this.plugs = event[1];
+                console.log(this.station);
+                console.log(this.plugs);
             }
         }
     };
