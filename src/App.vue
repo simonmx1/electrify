@@ -28,22 +28,30 @@
                 clipped
                 dark
                 class="white--text"
+                v-if="station != null"
         >
 
-      hello
-    </v-navigation-drawer>
-    <area-app-content :search-term=searchTerm>
+            name: {{this.station.name}}
+            <!--v-ul>
+                <v-list v-for="plug in this.plugs" :key="plug.id">
+                    {{plug.name}}
+                </v-list>
+            </v-ul-->
 
-    </area-app-content>
-    <v-footer
-            app
-            color=primary
-            dark
-    >Electrify
-      <v-spacer/>
-      © 2020
-    </v-footer>
-  </v-app>
+        </v-navigation-drawer>
+        <area-app-content :search-term=searchTerm
+        @drawer="draw">
+
+        </area-app-content>
+        <v-footer
+                app
+                color=primary
+                dark
+        >Electrify
+            <v-spacer/>
+            © 2020
+        </v-footer>
+    </v-app>
 </template>
 
 <script>
@@ -56,9 +64,17 @@
             AreaAppContent
         },
 
-    data: () => ({
-      searchTerm: null,
-      drawer: true,
-    }),
-  };
+        data: () => ({
+            searchTerm: null,
+            drawer: true,
+            station: null,
+            plugs: null
+        }),
+        methods:{
+            draw(event){
+                this.station = event[0];
+                this.plugs = event[1];
+            }
+        }
+    };
 </script>
