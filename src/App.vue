@@ -7,10 +7,9 @@
             clipped-right
             clipped-left
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>
-        <v-icon>mdi-linux</v-icon>
-        ELECTRIFY
+
+        <v-toolbar-title><v-icon x-large>mdi-battery-charging-100</v-icon>    ELECTRIFY</v-toolbar-title>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-text-field
@@ -28,7 +27,7 @@
             app
             clipped
             dark
-            mini
+            mini-variant
             class="white--text">
     </v-navigation-drawer>
     <v-navigation-drawer
