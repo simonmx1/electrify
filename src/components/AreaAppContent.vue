@@ -48,7 +48,6 @@
         },
         data() {
             return {
-                stationPlugs: null,
                 stations: null,
                 plugs: null,
                 filteredStations: null
@@ -59,14 +58,6 @@
         async mounted() {
             await this.loadStations();
             await this.loadPlugs();
-            this.stationPlugs = this.getPlugsFromStation(this.stations[0].id);
-
-            if (this.stationPlugs != null)
-                this.stationPlugs.forEach(function (plug) {
-                    alert("plug: " + plug.name);
-                });
-            else
-                alert("plugs = null");
             this.filterStations();
 
             let event = [this.filteredStations[0],this.getPlugsFromStation(this.filteredStations[0].id)];
