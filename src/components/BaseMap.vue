@@ -17,9 +17,8 @@
                 v-for="l in stations"
                 :key="l.name"
                 :lat-lng="convertLatLng(l)"
-                :visible="true"
                 v-on:click="click(l)"
-        />
+        ></l-marker>
     </l-map>
 </template>
 
