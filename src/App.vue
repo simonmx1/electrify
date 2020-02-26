@@ -15,6 +15,10 @@
                 </v-toolbar-title>
             </v-toolbar-title>
             <v-spacer></v-spacer>
+            <v-switch id="publiccheck"
+                      v-model="publiccheck"
+                      :label="`Public`"
+            ></v-switch>
             <v-text-field
                     v-model="searchTerm"
                     :append-icon-cb="() => {}"
@@ -92,8 +96,8 @@
             draw(event) {
                 this.station = event[0];
                 this.plugs = event[1];
-                console.log(this.station);
-                console.log(this.plugs);
+                //console.log(this.station);
+                //console.log(this.plugs);
             }
         }
     };

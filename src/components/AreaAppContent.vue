@@ -16,7 +16,7 @@
                     style="z-index: 0"
                     @drawer="drawer"
             />
-            <v-dialog
+            <!--v-dialog
                     v-model="detailDialog"
                     app
                     right
@@ -25,7 +25,7 @@
                     hide-overlay
                     max-width="800px"
             >
-            </v-dialog>
+            </v-dialog-->
         </v-container>
     </v-content>
 </template>
@@ -33,6 +33,7 @@
 <script>
     import GStatBaseMap from "./BaseMap";
     import axios from "axios";
+
 
     export default {
         name: "AreaAppContent",
@@ -63,8 +64,8 @@
         },
         methods: {
             drawer(e) {
-                console.log(this.plugs);
-                let event = [e,this.getPlugsFromStation(e)];
+                //console.log(this.plugs);
+                let event = [e, this.getPlugsFromStation(e)];
 
                 this.$emit("drawer", event);
             },
@@ -89,15 +90,20 @@
                 return ret;
             },
             filterStations() {
-                if (this.searchTerm == null) {
-                    this.filteredStations = this.stations;
-                } else {
-                    for (let i = 0; i < this.stations.length; i++) {
-                        if (this.stations[i].name.contains(this.searchTerm) && this.stations[i].accessType != "private") {
+                this.filteredStations = new Array();
+                for (let i = 0; i < this.stations.length; i++) {
+                    if(this.stations[i].accessType == "PUBLIC") {
+                        console.log("public");
+                        if (this.searchTerm == null) {
                             this.filteredStations.push(this.stations[i]);
+                        } else {
+                            if (this.stations[i].name.contains(this.searchTerm)) {
+                                this.filteredStations.push(this.stations[i]);
+                            }
                         }
                     }
                 }
+
             }
         }
     }
