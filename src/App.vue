@@ -90,7 +90,7 @@
 
     data: () => ({
       searchTerm: null,
-      publiccheck: false,
+      publiccheck: true,
       drawer: true,
       menu: null,
       station: null,
