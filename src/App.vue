@@ -8,7 +8,6 @@
                 clipped-left
         >
             <v-toolbar-title>
-
                 <v-toolbar-title>
                     <v-icon x-large>mdi-battery-charging-100</v-icon>
                     ELECTRIFY
@@ -61,6 +60,7 @@
 
         </v-navigation-drawer>
         <area-app-content :search-term=searchTerm
+                          :publiccheck=publiccheck
                           @drawer="draw">
 
         </area-app-content>
@@ -87,6 +87,7 @@
 
         data: () => ({
             searchTerm: null,
+            publiccheck: false,
             drawer: true,
             menu: null,
             station: null,

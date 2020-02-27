@@ -41,10 +41,14 @@
             GStatBaseMap
         },
         props: {
-            searchTerm: {type: String, required: false, default: null}
+            searchTerm: {type: String, required: false, default: null},
+            publiccheck: {type: Boolean, required: true, default: false}
         },
         watch: {
             searchTerm: function () {
+                this.filterStations();
+            },
+            publiccheck: function () {
                 this.filterStations();
             }
         },
@@ -52,7 +56,7 @@
             return {
                 stations: null,
                 plugs: null,
-                filteredStations: null
+                filteredStations: null,
             }
         },
         created() {
@@ -91,9 +95,10 @@
             },
             filterStations() {
                 this.filteredStations = new Array();
+                console.log("filter"+this.publiccheck);
                 for (let i = 0; i < this.stations.length; i++) {
-                    if(this.stations[i].accessType == "PUBLIC") {
-                        console.log("public");
+                    if(!this.publiccheck || this.stations[i].accessType == "PUBLIC") {
+                        //console.log("public");
                         if (this.searchTerm == null) {
                             this.filteredStations.push(this.stations[i]);
                         } else {
