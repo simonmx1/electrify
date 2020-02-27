@@ -18,7 +18,7 @@
       <v-switch
               v-model="publiccheck"
               :label="`Public`"
-              onclick="console.log('change')"
+
       ></v-switch>
 
       <v-text-field

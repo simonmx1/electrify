@@ -42,13 +42,14 @@
     },
     props: {
       searchTerm: {type: String, required: false, default: null},
-      publiccheck: {type: Boolean, required: false, default: false}
+      publiccheck: {type: Boolean, required: false, default: true}
     },
     watch: {
       searchTerm: function () {
         this.filterStations();
       },
       publiccheck: function () {
+        console.log("public change");
         this.filterStations();
       }
     },
@@ -102,12 +103,13 @@
             if (this.searchTerm == null) {
               this.filteredStations.push(this.stations[i]);
             } else {
-              if (this.stations[i].name.contains(this.searchTerm)) {
+              if (this.stations[i].name.includes(this.searchTerm)) {
                 this.filteredStations.push(this.stations[i]);
               }
             }
           }
         }
+        console.log("finished");
       }
     }
   }
