@@ -122,7 +122,7 @@
   }
 
   function defaultIconFunc() {
-    return null;
+    return "mdi-battery-charging-100";
   }
 
   function defaultMarkerColorFunc() {
@@ -134,7 +134,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   @import "~leaflet.markercluster/dist/MarkerCluster.css";
   @import "~leaflet.markercluster/dist/MarkerCluster.Default.css";
   @import "../../node_modules/leaflet/dist/leaflet.css";
@@ -147,9 +147,6 @@
     top: 0;
     display: block;
     text-align: center;
-  }
-
-  .l-icon-material {
     font-size: 20px;
   }
 </style>
