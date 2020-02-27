@@ -42,7 +42,7 @@
         },
         props: {
             searchTerm: {type: String, required: false, default: null},
-            publiccheck: {type: Boolean, required: true, default: false}
+            publiccheck: {type: Boolean, required: false, default: false}
         },
         watch: {
             searchTerm: function () {
