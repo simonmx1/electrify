@@ -35,79 +35,79 @@
   import axios from "axios";
 
 
-    export default {
-        name: "AreaAppContent",
-        components: {
-            GStatBaseMap
-        },
-        props: {
-            searchTerm: {type: String, required: false, default: null},
-            publiccheck: {type: Boolean, required: false, default: false}
-        },
-        watch: {
-            searchTerm: function () {
-                this.filterStations();
-            },
-            publiccheck: function () {
-                this.filterStations();
-            }
-        },
-        data() {
-            return {
-                stations: null,
-                plugs: null,
-                filteredStations: null,
-            }
-        },
-        created() {
-        },
-        async mounted() {
-            await this.loadStations();
-            await this.loadPlugs();
-            this.filterStations();
-        },
-        methods: {
-            drawer(e) {
-                //console.log(this.plugs);
-                let event = [e, this.getPlugsFromStation(e)];
+  export default {
+    name: "AreaAppContent",
+    components: {
+      GStatBaseMap
+    },
+    props: {
+      searchTerm: {type: String, required: false, default: null},
+      publiccheck: {type: Boolean, required: false, default: false}
+    },
+    watch: {
+      searchTerm: function () {
+        this.filterStations();
+      },
+      publiccheck: function () {
+        this.filterStations();
+      }
+    },
+    data() {
+      return {
+        stations: null,
+        plugs: null,
+        filteredStations: null,
+      }
+    },
+    created() {
+    },
+    async mounted() {
+      await this.loadStations();
+      await this.loadPlugs();
+      this.filterStations();
+    },
+    methods: {
+      drawer(e) {
+        //console.log(this.plugs);
+        let event = [e, this.getPlugsFromStation(e)];
 
-                this.$emit("drawer", event);
-            },
-            async loadStations() {
-                let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/get-station-details/');
-                this.stations = response.data;
-                //alert(this.stations);
-            },
-            async loadPlugs() {
-                let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/plugs/get-station-details/');
-                this.plugs = response.data;
-                //alert(this.plugs[0].latitude);
-            },
-            getPlugsFromStation(id) {
-                let ret = [];
-                for (let i = 0; i < this.plugs.length; i++) {
-                    let plug = this.plugs[i];
-                    if (plug.parentStation == id) {
-                        ret.push(plug);
-                    }
-                }
-                return ret;
-            },
-            filterStations() {
-                this.filteredStations = [];
-                console.log("filter"+this.publiccheck);
-                for (let i = 0; i < this.stations.length; i++) {
-                    if(!this.publiccheck || this.stations[i].accessType == "PUBLIC") {
-                        //console.log("public");
-                        if (this.searchTerm == null) {
-                            this.filteredStations.push(this.stations[i]);
-                        } else {
-                            if (this.stations[i].name.contains(this.searchTerm)) {
-                                this.filteredStations.push(this.stations[i]);
-                            }
-                        }
-                    }
-                }
+        this.$emit("drawer", event);
+      },
+      async loadStations() {
+        let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/get-station-details/');
+        this.stations = response.data;
+        //alert(this.stations);
+      },
+      async loadPlugs() {
+        let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/plugs/get-station-details/');
+        this.plugs = response.data;
+        //alert(this.plugs[0].latitude);
+      },
+      getPlugsFromStation(id) {
+        let ret = [];
+        for (let i = 0; i < this.plugs.length; i++) {
+          let plug = this.plugs[i];
+          if (plug.parentStation == id) {
+            ret.push(plug);
+          }
+        }
+        return ret;
+      },
+      filterStations() {
+        this.filteredStations = [];
+        console.log("filter" + this.publiccheck);
+        for (let i = 0; i < this.stations.length; i++) {
+          if (!this.publiccheck || this.stations[i].accessType == "PUBLIC") {
+            //console.log("public");
+            if (this.searchTerm == null) {
+              this.filteredStations.push(this.stations[i]);
+            } else {
+              if (this.stations[i].name.contains(this.searchTerm)) {
+                this.filteredStations.push(this.stations[i]);
+              }
+            }
+          }
+        }
 
       }
     }
