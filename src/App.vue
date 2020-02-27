@@ -8,17 +8,18 @@
                 clipped-left
         >
             <v-toolbar-title>
-
                 <v-toolbar-title>
                     <v-icon x-large>mdi-battery-charging-100</v-icon>
                     ELECTRIFY
                 </v-toolbar-title>
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-switch id="publiccheck"
-                      v-model="publiccheck"
-                      :label="`Public`"
-            ></v-switch>
+
+                <v-switch
+                        v-model="publiccheck"
+                        :label="`Public`"
+                ></v-switch>
+
             <v-text-field
                     v-model="searchTerm"
                     :append-icon-cb="() => {}"
@@ -28,6 +29,7 @@
                     color="white"
                     hide-details
             />
+
         </v-app-bar>
         <v-navigation-drawer
                 v-model="menu"
@@ -61,6 +63,7 @@
 
         </v-navigation-drawer>
         <area-app-content :search-term=searchTerm
+                          :publiccheck=publiccheck
                           @drawer="draw">
 
         </area-app-content>
@@ -87,6 +90,7 @@
 
         data: () => ({
             searchTerm: null,
+            publiccheck: false,
             drawer: true,
             menu: null,
             station: null,
