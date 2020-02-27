@@ -99,11 +99,11 @@
         console.log("filter" + this.publiccheck);
         for (let i = 0; i < this.stations.length; i++) {
           if (!this.publiccheck || this.stations[i].accessType == "PUBLIC") {
-            //console.log("public");
+            console.log("public");
             if (this.searchTerm == null) {
               this.filteredStations.push(this.stations[i]);
             } else {
-              if (this.stations[i].name.includes(this.searchTerm)) {
+              if (this.stations[i].name.toLowerCase().includes(this.searchTerm.toLowerCase())) {
                 this.filteredStations.push(this.stations[i]);
               }
             }
