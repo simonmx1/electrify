@@ -93,7 +93,7 @@
         }
         return ret;
       },
-      filterStations() {
+      async filterStations() {
         this.filteredStations = [];
         console.log("filter" + this.publiccheck);
         for (let i = 0; i < this.stations.length; i++) {
@@ -108,7 +108,6 @@
             }
           }
         }
-
       }
     }
   }
