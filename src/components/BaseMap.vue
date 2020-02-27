@@ -31,7 +31,7 @@
   import Vue2LeafletMarkercluster from 'vue2-leaflet-markercluster';
 
   export default {
-    name: "GStatBaseMap",
+    name: "BaseMap",
     components: {
       LMap,
       LTileLayer,

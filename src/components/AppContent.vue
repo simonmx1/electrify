@@ -4,7 +4,7 @@
             fluid
             style="height: 100%; padding: 0"
     >
-      <g-stat-base-map
+      <base-map
               v-if=this.filteredStations
               :zoom="9"
               :default-center="[46.4, 11.5]"
@@ -31,14 +31,14 @@
 </template>
 
 <script>
-  import GStatBaseMap from "./BaseMap";
+  import BaseMap from "./BaseMap";
   import axios from "axios";
 
 
   export default {
-    name: "AreaAppContent",
+    name: "AppContent",
     components: {
-      GStatBaseMap
+      BaseMap
     },
     props: {
       searchTerm: {type: String, required: false, default: null},

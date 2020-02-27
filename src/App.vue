@@ -52,21 +52,21 @@
       <v-icon x-large @click.stop="station = null">mdi-chevron-double-right</v-icon>
       <br>
       name: {{this.station.name}}
-      <v-ul>
+      <ul>
         <v-list v-for="plug in this.plugs" :key="plug.id">
           <li>
             {{plug.name}}
             <v-spacer></v-spacer>
           </li>
         </v-list>
-      </v-ul>
+      </ul>
 
     </v-navigation-drawer>
-    <area-app-content :search-term=searchTerm
+    <app-content :search-term=searchTerm
                       :publiccheck=publiccheck
                       @drawer="draw">
 
-    </area-app-content>
+    </app-content>
     <v-footer
             app
             color=primary
@@ -79,13 +79,13 @@
 </template>
 
 <script>
-  import AreaAppContent from './components/AreaAppContent';
+  import AppContent from './components/AppContent';
 
   export default {
     name: 'App',
 
     components: {
-      AreaAppContent
+      AppContent
     },
 
     data: () => ({
