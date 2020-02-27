@@ -63,11 +63,11 @@
       </ul>
 
     </v-navigation-drawer>
-    <area-app-content :search-term=searchTerm
+    <app-content :search-term=searchTerm
                       :publiccheck=publiccheck
                       @drawer="draw">
 
-    </area-app-content>
+    </app-content>
     <v-footer
             app
             color=primary
@@ -80,13 +80,13 @@
 </template>
 
 <script>
-  import AreaAppContent from './components/AreaAppContent';
+  import AppContent from './components/AppContent';
 
   export default {
     name: 'App',
 
     components: {
-      AreaAppContent
+      AppContent
     },
 
     data: () => ({
