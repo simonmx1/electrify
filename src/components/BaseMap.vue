@@ -13,26 +13,30 @@
             :url="'http://{s}.tile.osm.org/{z}/{x}/{y}.png'"
             :attribution="attribution"
     />
-    <l-marker
-            v-for="l in stations"
-            :key="l.name"
-            :lat-lng="convertLatLng(l)"
-            v-on:click="click(l)"
-            :icon="getMarkerIcon(l)"
-    ></l-marker>
+    <marker-cluster>
+      <l-marker
+              v-for="l in stations"
+              :key="l.name"
+              :lat-lng="convertLatLng(l)"
+              v-on:click="click(l)"
+              :icon="getMarkerIcon(l)"
+      ></l-marker>
+    </marker-cluster>
   </l-map>
 </template>
 
 <script>
   import {LMap, LTileLayer, LMarker} from 'vue2-leaflet';
   import L, {latLng} from 'leaflet';
+  import Vue2LeafletMarkercluster from 'vue2-leaflet-markercluster';
 
   export default {
     name: "GStatBaseMap",
     components: {
       LMap,
       LTileLayer,
-      LMarker
+      LMarker,
+      'marker-cluster': Vue2LeafletMarkercluster,
     },
     props: {
       height: {type: String, required: false, default: "900px"},
@@ -131,5 +135,21 @@
 </script>
 
 <style scoped>
+  @import "~leaflet.markercluster/dist/MarkerCluster.css";
+  @import "~leaflet.markercluster/dist/MarkerCluster.Default.css";
   @import "../../node_modules/leaflet/dist/leaflet.css";
+
+  .l-icon-material {
+    margin-top: -42px;
+    margin-left: -17px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    text-align: center;
+  }
+
+  .l-icon-material {
+    font-size: 20px;
+  }
 </style>
