@@ -18,6 +18,7 @@
       <v-switch
               v-model="publiccheck"
               :label="`Public`"
+              onclick="console.log('change')"
       ></v-switch>
 
       <v-text-field
@@ -52,14 +53,14 @@
       <v-icon x-large @click.stop="station = null">mdi-chevron-double-right</v-icon>
       <br>
       name: {{this.station.name}}
-      <v-ul>
+      <ul>
         <v-list v-for="plug in this.plugs" :key="plug.id">
           <li>
             {{plug.name}}
             <v-spacer></v-spacer>
           </li>
         </v-list>
-      </v-ul>
+      </ul>
 
     </v-navigation-drawer>
     <area-app-content :search-term=searchTerm
