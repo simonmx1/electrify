@@ -59,44 +59,44 @@
       drawer(e) {
         let event = [e, this.getPlugsFromStation(e)];
 
-        this.$emit("drawer", event);
-      },
-      async loadStations() {
-        let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/get-station-details/');
-        this.stations = response.data;
-      },
-      async loadPlugs() {
-        let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/plugs/get-station-details/');
-        this.plugs = response.data;
-      },
-      getPlugsFromStation(id) {
-        let ret = [];
-        for (let i = 0; i < this.plugs.length; i++) {
-          let plug = this.plugs[i];
-          if (plug.parentStation == id) {
-            ret.push(plug);
-          }
-        }
-        return ret;
-      },
-      async filterStations() {
-        this.filteredStations = [];
-        for (let i = 0; i < this.stations.length; i++) {
-          if (!this.publicCheck || this.stations[i].accessType == "PUBLIC") {
-            console.log("public");
-            if (this.searchTerm == null) {
-              this.filteredStations.push(this.stations[i]);
-            } else {
-              if (this.stations[i].name.toLowerCase().includes(this.searchTerm.toLowerCase())) {
-                this.filteredStations.push(this.stations[i]);
-              }
+                this.$emit("drawer", event);
+            },
+            async loadStations() {
+                let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/get-station-details/');
+                this.stations = response.data;
+            },
+            async loadPlugs() {
+                let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/plugs/get-station-details/');
+                this.plugs = response.data;
+            },
+            getPlugsFromStation(id) {
+                let ret = [];
+                for (let i = 0; i < this.plugs.length; i++) {
+                    let plug = this.plugs[i];
+                    if (plug.parentStation == id) {
+                        ret.push(plug);
+                    }
+                }
+                return ret;
+            },
+            async filterStations() {
+                let filteredStations = [];
+                for (let i = 0; i < this.stations.length; i++) {
+                    if (!this.publicCheck || this.stations[i].accessType == "PUBLIC") {
+                        if (this.searchTerm == null) {
+                            filteredStations.push(this.stations[i]);
+                        } else {
+                            if (this.stations[i].name.toLowerCase().includes(this.searchTerm.toLowerCase())) {
+                                filteredStations.push(this.stations[i]);
+                            }
+                        }
+                    }
+                }
+                this.filteredStations = filteredStations;
+                console.log("finished");
             }
-          }
         }
-        console.log("finished");
-      }
     }
-  }
 </script>
 
 <style>
