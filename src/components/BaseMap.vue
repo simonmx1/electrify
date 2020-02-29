@@ -43,6 +43,7 @@
       zoom: {type: Number, required: false, default: 6},
       defaultCenter: {type: Array, required: false},
       searchTerm: {type: String, required: false, default: null},
+      publicCheck: {type: Boolean, required: false, default: true},
       stations: {type: Array, required: true},
       //Styling Marker
       iconFunc: {type: Function, required: false, default: defaultIconFunc},
@@ -60,9 +61,6 @@
       },
       onMove(event) {
         this.$emit('move', event)
-      },
-      onMouseClick(event) {
-        this.$emit('mouseClick', event)
       },
       click(event) {
         this.$emit('drawer', event);

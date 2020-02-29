@@ -10,22 +10,11 @@
               :default-center="[46.4, 11.5]"
               :search-term=this.searchTerm
               :stations=this.filteredStations
-              @mouseClick="onMouseClick"
               class="float-none"
               ref="map"
               style="z-index: 0"
-              @drawer="drawer"
+              @drawer="drawer()"
       />
-      <!--v-dialog
-              v-model="detailDialog"
-              app
-              right
-              clipped
-              dark
-              hide-overlay
-              max-width="800px"
-      >
-      </v-dialog-->
     </v-container>
   </v-content>
 </template>
@@ -34,7 +23,6 @@
   import BaseMap from "./BaseMap";
   import axios from "axios";
 
-
   export default {
     name: "AppContent",
     components: {
@@ -42,13 +30,13 @@
     },
     props: {
       searchTerm: {type: String, required: false, default: null},
-      publiccheck: {type: Boolean, required: false, default: true}
+      publicCheck: {type: Boolean, required: false, default: true}
     },
     watch: {
       searchTerm: function () {
         this.filterStations();
       },
-      publiccheck: function () {
+      publicCheck: function () {
         console.log("public change");
         this.filterStations();
       }
@@ -69,7 +57,6 @@
     },
     methods: {
       drawer(e) {
-        //console.log(this.plugs);
         let event = [e, this.getPlugsFromStation(e)];
 
         this.$emit("drawer", event);
@@ -77,12 +64,10 @@
       async loadStations() {
         let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/get-station-details/');
         this.stations = response.data;
-        //alert(this.stations);
       },
       async loadPlugs() {
         let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/plugs/get-station-details/');
         this.plugs = response.data;
-        //alert(this.plugs[0].latitude);
       },
       getPlugsFromStation(id) {
         let ret = [];
@@ -96,9 +81,8 @@
       },
       async filterStations() {
         this.filteredStations = [];
-        console.log("filter" + this.publiccheck);
         for (let i = 0; i < this.stations.length; i++) {
-          if (!this.publiccheck || this.stations[i].accessType == "PUBLIC") {
+          if (!this.publicCheck || this.stations[i].accessType == "PUBLIC") {
             console.log("public");
             if (this.searchTerm == null) {
               this.filteredStations.push(this.stations[i]);
