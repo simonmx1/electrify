@@ -62,6 +62,7 @@
         },
         mounted() {
             this.filterStations();
+            console.log(this.filteredStations[0]);
         },
         methods: {
             convertLatLng(l) {
@@ -98,7 +99,6 @@
                     }
                 }
                 this.filteredStations = filteredStations;
-                console.log("finished");
             }
         },
         data() {
