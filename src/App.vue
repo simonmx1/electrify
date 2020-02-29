@@ -88,8 +88,8 @@
 
     data: () => ({
       searchTerm: null,
-      publicCheck: null,
-      drawer: true,
+      publicCheck: true,
+      drawer: false,
       menu: null,
       station: null,
       plugs: null

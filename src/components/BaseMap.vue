@@ -13,9 +13,11 @@
             :url="'http://{s}.tile.osm.org/{z}/{x}/{y}.png'"
             :attribution="attribution"
     />
-    <marker-cluster>
+    <marker-cluster
+            v-if="filteredStations"
+    >
       <l-marker
-              v-for="l in stations"
+              v-for="l in filteredStations"
               :key="l.name"
               :lat-lng="convertLatLng(l)"
               v-on:click="click(l)"
@@ -49,8 +51,17 @@
       iconFunc: {type: Function, required: false, default: defaultIconFunc},
       iconColorFunc: {type: Function, required: false, default: defaultIconColorFunc},
       markerColorFunc: {type: Function, required: false, default: defaultMarkerColorFunc},
-
-
+    },
+    watch: {
+      searchTerm: function () {
+        this.filterStations();
+      },
+      publicCheck: function () {
+        this.filterStations();
+      }
+    },
+    created() {
+      this.filteredStations = this.stations;
     },
     methods: {
       convertLatLng(l) {
@@ -71,10 +82,29 @@
           iconColor: this.iconColorFunc(item),
           markerColor: this.markerColorFunc(item)
         })
+      },
+      async filterStations() {
+        let filteredStations = [];
+        for (let i = 0; i < this.stations.length; i++) {
+          if (!this.publicCheck || this.stations[i].accessType == "PUBLIC") {
+            if (this.searchTerm == null) {
+              filteredStations.push(this.stations[i]);
+            } else {
+              if (this.stations[i].name.toLowerCase().includes(this.searchTerm.toLowerCase())) {
+                filteredStations.push(this.stations[i]);
+              }
+            }
+          }
+        }
+        this.filteredStations = filteredStations;
+        console.log("finished");
       }
     },
     data() {
       return {
+        filteredStations: null,
+        attribution: '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        center: this.defaultCenter,
         IconMaterial: L.Icon.extend({
           options: {
             className: 'l-icon-material',
@@ -112,9 +142,7 @@
 
             return svg;
           }
-        }),
-        attribution: '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-        center: this.defaultCenter
+        })
       }
     }
   }

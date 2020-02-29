@@ -5,11 +5,11 @@
             style="height: 100%; padding: 0"
     >
       <base-map
-              v-if=this.filteredStations
               :zoom="9"
               :default-center="[46.4, 11.5]"
-              :search-term=this.searchTerm
-              :stations=this.filteredStations
+              :search-term=searchTerm
+              :public-check="publicCheck"
+              :stations="stations"
               class="float-none"
               ref="map"
               style="z-index: 0"
@@ -32,20 +32,10 @@
       searchTerm: {type: String, required: false, default: null},
       publicCheck: {type: Boolean, required: false, default: true}
     },
-    watch: {
-      searchTerm: function () {
-        this.filterStations();
-      },
-      publicCheck: function () {
-        console.log("public change");
-        this.filterStations();
-      }
-    },
     data() {
       return {
         stations: null,
         plugs: null,
-        filteredStations: null,
       }
     },
     created() {
@@ -53,50 +43,33 @@
     async mounted() {
       await this.loadStations();
       await this.loadPlugs();
-      this.filterStations();
     },
     methods: {
       drawer(e) {
         let event = [e, this.getPlugsFromStation(e)];
 
-                this.$emit("drawer", event);
-            },
-            async loadStations() {
-                let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/get-station-details/');
-                this.stations = response.data;
-            },
-            async loadPlugs() {
-                let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/plugs/get-station-details/');
-                this.plugs = response.data;
-            },
-            getPlugsFromStation(id) {
-                let ret = [];
-                for (let i = 0; i < this.plugs.length; i++) {
-                    let plug = this.plugs[i];
-                    if (plug.parentStation == id) {
-                        ret.push(plug);
-                    }
-                }
-                return ret;
-            },
-            async filterStations() {
-                let filteredStations = [];
-                for (let i = 0; i < this.stations.length; i++) {
-                    if (!this.publicCheck || this.stations[i].accessType == "PUBLIC") {
-                        if (this.searchTerm == null) {
-                            filteredStations.push(this.stations[i]);
-                        } else {
-                            if (this.stations[i].name.toLowerCase().includes(this.searchTerm.toLowerCase())) {
-                                filteredStations.push(this.stations[i]);
-                            }
-                        }
-                    }
-                }
-                this.filteredStations = filteredStations;
-                console.log("finished");
-            }
+        this.$emit("drawer", event);
+      },
+      async loadStations() {
+        let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/get-station-details/');
+        this.stations = response.data;
+      },
+      async loadPlugs() {
+        let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/plugs/get-station-details/');
+        this.plugs = response.data;
+      },
+      getPlugsFromStation(id) {
+        let ret = [];
+        for (let i = 0; i < this.plugs.length; i++) {
+          let plug = this.plugs[i];
+          if (plug.parentStation == id) {
+            ret.push(plug);
+          }
         }
+        return ret;
+      }
     }
+  }
 </script>
 
 <style>
