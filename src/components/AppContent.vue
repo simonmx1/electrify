@@ -14,7 +14,7 @@
                     class="float-none"
                     ref="map"
                     style="z-index: 0"
-                    @drawer="drawer()"
+                    @click="click()"
             />
         </v-container>
     </v-content>
@@ -44,10 +44,8 @@
             await this.loadPlugs();
         },
         methods: {
-            drawer(e) {
-                let event = [e, this.getPlugsFromStation(e)];
-
-                this.$emit("drawer", event);
+            click(event) {
+                this.$emit("click", event, this.getPlugsFromStation(event));
             },
             async loadStations() {
                 let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/get-station-details/');

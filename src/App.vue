@@ -44,25 +44,24 @@
                 dark
                 right
                 class="white--text"
-                v-if="station != null"
         >
 
-            <v-icon x-large @click.stop="station = null">mdi-chevron-double-right</v-icon>
+            <v-icon x-large @click.stop="closeDrawer()">mdi-chevron-double-right</v-icon>
             <br>
+            <!--ul>
             name: {{this.station.name}}
-            <ul>
                 <v-list v-for="plug in this.plugs" :key="plug.id">
                     <li>
                         {{plug.name}}
                         <v-spacer></v-spacer>
                     </li>
                 </v-list>
-            </ul>
+            </ul-->
 
         </v-navigation-drawer>
         <app-content :search-term=searchTerm
                      :public-check=publicCheck
-                     @drawer="draw">
+                     @click="click()">
 
         </app-content>
         <v-footer
@@ -95,11 +94,17 @@
             plugs: null
         }),
         methods: {
-            draw(event) {
-                this.station = event[0];
-                this.plugs = event[1];
-                //console.log(this.station);
-                //console.log(this.plugs);
+            click(event, plugs) {
+                this.station = event;
+                this.plugs = plugs;
+                this.drawer = true;
+                console.log(event);
+                console.log(plugs);
+            },
+            closeDrawer() {
+                this.drawer = false;
+                this.station = null;
+                this.plugs = null;
             }
         }
     };

@@ -20,8 +20,8 @@
                     v-for="l in filteredStations"
                     :key="l.id"
                     :lat-lng="convertLatLng(l)"
-                    v-on:click="click(l)"
                     :icon="getMarkerIcon(l)"
+                    @mouseup="click"
             ></l-marker>
         </marker-cluster>
     </l-map>
@@ -75,7 +75,8 @@
                 this.$emit('move', event)
             },
             click(event) {
-                this.$emit('drawer', event);
+                console.log(event);
+                this.$emit('click', event);
             },
             getMarkerIcon: function (item) {
                 return new this.IconMaterial({
