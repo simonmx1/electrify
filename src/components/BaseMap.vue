@@ -21,7 +21,7 @@
                     :key="l.id"
                     :lat-lng="convertLatLng(l)"
                     :icon="getMarkerIcon(l)"
-                    @mouseup="click"
+                    @mouseup="click(l)"
             ></l-marker>
         </marker-cluster>
     </l-map>

@@ -14,7 +14,7 @@
                     class="float-none"
                     ref="map"
                     style="z-index: 0"
-                    @click="click()"
+                    @click="click"
             />
         </v-container>
     </v-content>
@@ -45,6 +45,7 @@
         },
         methods: {
             click(event) {
+                console.log(event)
                 this.$emit("click", event, this.getPlugsFromStation(event));
             },
             async loadStations() {

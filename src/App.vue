@@ -61,7 +61,7 @@
         </v-navigation-drawer>
         <app-content :search-term=searchTerm
                      :public-check=publicCheck
-                     @click="click()">
+                     @click="click">
 
         </app-content>
         <v-footer
@@ -95,7 +95,7 @@
         }),
         methods: {
             click(event, plugs) {
-                this.station = event;
+                this.station = event[0];
                 this.plugs = plugs;
                 this.drawer = true;
                 console.log(event);
