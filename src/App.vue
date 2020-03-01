@@ -51,7 +51,7 @@
                     <v-icon x-large @click.stop="closeDrawer()">mdi-chevron-double-right</v-icon>
                     <h3>{{this.station.name}}</h3>
                 </v-card-title>
-                <br>
+                <hr>
                 <ul>
                     Ort: {{this.station.city}}
                     <br>
@@ -60,7 +60,7 @@
                     Access Type: {{this.station.accessType}}
                     <br>
                     Status: {{this.station.state}}
-                    <br>
+                    <hr>
                     <v-list v-for="plug in this.plugs" :key="plug.id">
                         <v-icon>mdi-battery-positive</v-icon>
                         {{plug.name}}
