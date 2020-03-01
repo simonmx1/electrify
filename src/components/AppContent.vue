@@ -45,8 +45,8 @@
         },
         methods: {
             click(event) {
-                console.log(event)
-                this.$emit("click", event, this.getPlugsFromStation(event));
+                //console.log(event)
+                this.$emit("click", event, this.getPlugsFromStation(event.id));
             },
             async loadStations() {
                 let response = await axios.get('https://ipchannels.integreen-life.bz.it/emobility/rest/get-station-details/');
@@ -58,6 +58,7 @@
             },
             getPlugsFromStation(id) {
                 let ret = [];
+                //console.log(this.plugs);
                 for (let i = 0; i < this.plugs.length; i++) {
                     let plug = this.plugs[i];
                     if (plug.parentStation == id) {

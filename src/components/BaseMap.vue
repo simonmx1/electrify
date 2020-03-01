@@ -62,7 +62,6 @@
         },
         mounted() {
             this.filterStations();
-            console.log(this.filteredStations[0]);
         },
         methods: {
             convertLatLng(l) {
@@ -75,7 +74,6 @@
                 this.$emit('move', event)
             },
             click(event) {
-                console.log(event);
                 this.$emit('click', event);
             },
             getMarkerIcon: function (item) {

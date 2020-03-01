@@ -38,25 +38,46 @@
                 class="white--text">
         </v-navigation-drawer>
         <v-navigation-drawer
-                v-model="drawer"
                 app
                 clipped
                 dark
                 right
                 class="white--text"
+                v-if="station != null"
         >
 
             <v-icon x-large @click.stop="closeDrawer()">mdi-chevron-double-right</v-icon>
             <br>
-            <!--ul>
-            name: {{this.station.name}}
+            <ul>
+                Name: {{this.station.name}}
+                <br>
+                Ort: {{this.station.city}}
+                <br>
+                Betreiber: {{this.station.origin}}
+                <br>
+                Access Type: {{this.station.accessType}}
+                <br>
+                Status: {{this.station.state}}
                 <v-list v-for="plug in this.plugs" :key="plug.id">
                     <li>
                         {{plug.name}}
-                        <v-spacer></v-spacer>
+                        <div v-for="outlet in plug.outlets" :key="outlet.id">
+                            <ul>
+                                <li>
+                                    Max Current: {{outlet.maxCurrent}}
+                                </li>
+                                <li>
+                                    Max Power: {{outlet.maxPower}}
+                                </li>
+                                <li>
+                                    Min Current: {{outlet.minCurrent}}
+                                </li>
+                            </ul>
+                            <v-spacer></v-spacer>
+                        </div>
                     </li>
                 </v-list>
-            </ul-->
+            </ul>
 
         </v-navigation-drawer>
         <app-content :search-term=searchTerm
@@ -95,14 +116,14 @@
         }),
         methods: {
             click(event, plugs) {
-                this.station = event[0];
+                this.station = event;
                 this.plugs = plugs;
-                this.drawer = true;
+                //this.drawer = true;
                 console.log(event);
                 console.log(plugs);
             },
             closeDrawer() {
-                this.drawer = false;
+                //this.drawer = false;
                 this.station = null;
                 this.plugs = null;
             }
