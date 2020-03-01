@@ -57,11 +57,13 @@
                     <br>
                     Betreiber: {{this.station.origin}}
                     <br>
-                    Access Type: {{this.station.accessType}}
+                    Access Type: <b><i>{{this.station.accessType}}</i></b>
                     <br>
-                    Status: {{this.station.state}}
-                    <hr>
+                    Status: <b><i>{{this.station.state}}</i></b>
+                    <br>
+                    <br>
                     <v-list v-for="plug in this.plugs" :key="plug.id">
+                    <hr>
                         <v-icon>mdi-battery-positive</v-icon>
                         {{plug.name}}
                         <div v-for="outlet in plug.outlets" :key="outlet.id">
@@ -78,7 +80,6 @@
                             </ul>
                             <br>
                         </div>
-                        <hr>
                     </v-list>
                 </ul>
             </v-card>
