@@ -74,8 +74,9 @@
                                     Min Current: {{outlet.minCurrent}}
                                 </li>
                             </ul>
-                            <v-spacer></v-spacer>
+                            <br>
                         </div>
+                        <hr>
                     </v-list>
                 </ul>
             </v-card>
