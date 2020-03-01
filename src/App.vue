@@ -12,11 +12,6 @@
                 ELECTRIFY
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-switch
-                    v-model="publicCheck"
-                    :label="'Public'"
-
-            ></v-switch>
 
             <v-text-field
                     v-model="searchTerm"
@@ -35,7 +30,13 @@
                 clipped
                 dark
                 mini-variant
+                mini-variant-width="120"
                 class="white--text">
+            <v-switch
+                    style="margin-left: 10px"
+                    v-model="publicCheck"
+                    :label="'Public'"
+            ></v-switch>
         </v-navigation-drawer>
         <v-navigation-drawer
                 app
@@ -45,21 +46,21 @@
                 class="white--text"
                 v-if="station != null"
         >
-
-            <v-icon x-large @click.stop="closeDrawer()">mdi-chevron-double-right</v-icon>
-            <br>
-            <ul>
-                Name: {{this.station.name}}
-                <br>
-                Ort: {{this.station.city}}
-                <br>
-                Betreiber: {{this.station.origin}}
-                <br>
-                Access Type: {{this.station.accessType}}
-                <br>
-                Status: {{this.station.state}}
-                <v-list v-for="plug in this.plugs" :key="plug.id">
-                    <li>
+            <v-card class="white--text" dark>
+                <v-card-title dark style="padding-left: 10px">
+                    <v-icon x-large @click.stop="closeDrawer()">mdi-chevron-double-right</v-icon>
+                    <h3>{{this.station.name}}</h3>
+                </v-card-title>
+                <ul>
+                    Ort: {{this.station.city}}
+                    <br>
+                    Betreiber: {{this.station.origin}}
+                    <br>
+                    Access Type: {{this.station.accessType}}
+                    <br>
+                    Status: {{this.station.state}}
+                    <v-list v-for="plug in this.plugs" :key="plug.id">
+                        <v-icon>mdi-battery-positive</v-icon>
                         {{plug.name}}
                         <div v-for="outlet in plug.outlets" :key="outlet.id">
                             <ul>
@@ -75,9 +76,9 @@
                             </ul>
                             <v-spacer></v-spacer>
                         </div>
-                    </li>
-                </v-list>
-            </ul>
+                    </v-list>
+                </ul>
+            </v-card>
 
         </v-navigation-drawer>
         <app-content :search-term=searchTerm
