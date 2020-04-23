@@ -26,7 +26,7 @@
         </v-app-bar>
         <v-navigation-drawer
                 v-model="menu"
-                mobile-break-point="1000px"
+                mobile-break-point="500px"
                 app
                 clipped
                 dark
