@@ -2,12 +2,9 @@
 
 ## Small Description
 ```
-Once the project is running you can click on single markers
-to view details of a station and look if they're available.
-In the left drawer is a button which allows to filter the
-stations available to the public and the private ones.
-The search funciton at the top allows to filter stations by
-their location.
+This project displays all the charging stations for electric vehicles
+on a map using the data from the OpenDataHub. When clicking on icons,
+additional information about a single station will be displayed.
 ```
 
 ## Project setup
